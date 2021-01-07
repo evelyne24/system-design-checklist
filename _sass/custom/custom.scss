@@ -1,0 +1,49 @@
+$info-border: #56bb7d;
+$info-background: #f5fbf5;
+$mark: #fff5c0;
+$note-border: #e8af0b;
+$note-background: #fdfbf5;
+
+code {
+  margin: 0em 0.3em;
+  padding: 0.1em 0.2em; 
+}
+
+.note {
+  background: $note-background;
+  border-left: $border-radius solid $note-border;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+  padding: 0.6rem 0.8rem 0.4rem 0.8rem;
+
+  &::before {
+    color: $note-border;
+    content: "Why do we care about this?";
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    padding-bottom: 0.125rem;
+  }
+}
+
+.info {
+  background: $info-background;
+  border-left: $border-radius solid $info-border;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+  padding: 0.4rem 0.8rem;
+}
+
+mark {
+  background-color: $mark;
+}
+
+/* Disable highlight for toc links */
+#markdown-toc mark {
+  all: unset;
+}
+
+/* TODO cleanup when bug https://github.com/pmarsceill/just-the-docs/issues/517 is fixed */
+.task-list .task-list-item {
+  display: block;
+}

@@ -1,0 +1,35 @@
+title: The System Design Checklist
+tagline: What to think about when designing software systems
+description: A technical checklist to spark curiosity and reflection when designing software systems
+
+# Set theme
+remote_theme: pmarsceill/just-the-docs
+color_scheme: custom
+
+# Enable or disable the site search
+search_enabled: true
+
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# Aux links for the upper right navigation
+aux_links:
+  "The System Design Checklist on GitHub":
+    - "//github.com/evelyne24/system-design-checklist"
+
+# Makes Aux links open in a new tab. Default is false
+aux_links_new_tab: false
+
+# Footer
+footer_content: "Copyright &copy; 2021 Evelina Vrabie. Distributed by an <a href=\"https://github.com/evelyne24/system-design-checklist/blob/main/LICENCE\">Apache license</a>."
+# Footer "Edit this page on GitHub" link text
+gh_edit_link: true # show or hide edit this page link
+gh_edit_link_text: "Edit this page on GitHub"
+gh_edit_repository: "https://github.com/evelyne24/system-design-checklist" # the github URL for your repo
+gh_edit_branch: "master" # the branch that your docs is served from
+# gh_edit_source: docs # the source that your files originate from
+gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
+
+plugins:
+  - jekyll-remote-theme

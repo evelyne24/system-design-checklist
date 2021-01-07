@@ -1,0 +1,8 @@
+.DS_Store
+.history
+
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
