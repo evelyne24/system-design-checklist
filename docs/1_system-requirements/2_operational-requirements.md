@@ -30,10 +30,19 @@ For ease of calculations, consider the expected uptime in round units. This info
 
 ### Determine the <mark>security standards</mark> to comply with.
 
-For example, a financial system might need PCI-DSS, CyberSecurity etc. This informs choices for security, auditing logging, monitoring, auditing.
+<div class="note" markdown="1">
+
+For example, a financial system might need PCI-DSS, CyberSecurity etc. This informs choices for security, auditing logging, monitoring, auditing.  
+
+It also informs about the amount of storage space required, for example, if the data needs to be persisted for a certain amount of years.
+
+More over, if the auditing process doesn't require real-time acces, after a while, older data can be archived and moved to cold storage, to optimise storage costs.
+
+</div>
 
 - [ ] The system must preserve logs for a certain period
 - [ ] The system requires external pen-testing and auditing
+- [ ] Auditing data doesn't need to be retrieved instantly
 
 ### Determine the <mark>data privacy standards</mark> to comply with.
 

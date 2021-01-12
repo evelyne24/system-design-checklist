@@ -96,8 +96,19 @@ This clarifies if the system processes and aggregates _homogenous_ or _heterogen
 
 ### Determine if the system offers <mark>multi-platform consistent user experience</mark>.
 
+<div class="note" markdown="1">
+
+For example, a notification system will have different requirements than a financial app.
+
+If users clear a notification on one device then switch to another, it's expected they won't see the same notification as new, even though it might take a few seconds to update.
+
+On the other hand, it's common for banking apps to allow usage of one device at the time. If the
+user switches devices, they will be expected to go through authentication and device authorisation before using the app on the new device.
+
+</div>
+
 - [ ] The user switches seamlessly between devices in the middle of a task
-- [ ] The user uses the product on one device at a time (for example, a banking app)
+- [ ] The user uses the product on one device at a time
 
 ### Determine if the system works <mark>offline</mark>.
 
