@@ -15,6 +15,9 @@ has_toc: true
 
 </div>
 
-## TODO Encryption at rest and in transit
 
-## TODO Authentication and authorisation
+## Encryption at rest and in transit
+
+## Authentication and authorisation
+
+## Penetration testing

@@ -9,4 +9,10 @@ has_toc: true
 # Enable logging and monitoring
 {: .no_toc }
 
-## TODO metrics, logging, alarms
+## Goals and metrics
+
+## Logging and auditing
+
+## Alarms and fatigue
+
+## Disaster recovery

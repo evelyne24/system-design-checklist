@@ -1,7 +1,7 @@
 ---
 layout: default
 title: System capacity
-nav_order: 2
+nav_order: 3
 permalink: /capacity
 has_toc: true
 ---

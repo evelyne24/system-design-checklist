@@ -47,3 +47,8 @@ mark {
 .task-list .task-list-item {
   display: block;
 }
+
+.task-list .task-list-item + .task-list-item .task-list-item {
+  margin-left: 2rem;
+}
+
