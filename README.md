@@ -51,9 +51,16 @@ If you like the checklist, let's make it more useful together! 💪
 
 > _Mistakes are human and technology advances so quickly, that what was good enough yesterday is not anymore today. Nobody can know everything._ 
 
-You're very welcome to contribute to fix mistakes, and refine the list of questions and options. The easiest way to contribute is by submitting a _Pull Request_. I also appreciate your thoughts on how this checklist is useful (or not). 
+You're very welcome to contribute to fix mistakes, and refine the list of questions and options by submitting a Pull Request.
 
-> _Please leave a comment with suggestions to make it more specific or shorter for certain cases, like the ones I mentioned in the first paragraph._
+> _I'm running some A/B tests with real teams from a few companies to benchmark if the usage of a checklist results in_:
+> - shorter code commit → review → deploy cycles
+> - improved code quality
+> - increased number of discovered gotchas 
+> - fewer incidents
+> - better knowledge loops in and between teams
+
+> _If you want to try it, email me at evelina@vrabie.info. Feel free to leave a comment with suggestions to make it more specific or shorter for certain cases, like the ones I mentioned in the first paragraph_.
 
 ### How to run Jekyll locally
 
