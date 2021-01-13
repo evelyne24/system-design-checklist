@@ -12,7 +12,7 @@ nav_order: 5
 
 <div class="note" markdown="1">
 
-**API considerations**
+**Opinionated API considerations**
 
 - Use an API description language like OpenAPI/Swagger, RAML etc.
   This serves as a single source of truth for all aspects of API design and development, for example generated documentation and contract-first design.
@@ -52,7 +52,7 @@ Representational State Transfer (REST) is the most common and assumed in the res
 
 <div class="note" markdown="1">
 
-**REST Considerations**
+**Opinionated REST considerations**
 
 - Use plural nouns for resources `HTTP` verbs to operate on resources
 - Consider _filtering_ over _nesting_: nesting enforces relationships that could change and changing APIs is hard, e.g.
@@ -243,7 +243,7 @@ Creating APIs is a lot more waterfall than agile. _APIs are hard to change well_
 - In a distributed system, the responsibility is shared across multiple teams who need coordination.
 - Once the API is published, changing it requires either forcing clients to update or maintaining previous versions to avoid breaking contract.
 
-**Considerations**
+**Opinionated considerations**
 
 - Use versions as dates `2021-01-01` and submit them as headers `Api-Version: 2021-01-01`; numbering like `v1`, `v2` are not as expressive to indicate how old the requested version is
 - Promote incremental improvement
