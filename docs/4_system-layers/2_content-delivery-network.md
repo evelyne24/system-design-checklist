@@ -27,9 +27,9 @@ The `HTTP/1` specification recommends opening up to two connections from a clien
 
 `HTTP/2` solves this with _multiplex responses_, by interleaving multiple responses in parallel without blocking. This allows the web server to serve multiple files at the same time in a single connection.
 
-|        ![Http2 request and response multiplexing](https://developers.google.com/web/fundamentals/performance/http2/images/push01.svg)         |
-| :-------------------------------------------------------------------------------------------------------------------------------------------: |
-| [Http2 request and response multiplexing](https://developers.google.com/web/fundamentals/performance/http2#request_and_response_multiplexing) |
+| ![Http2 request and response multiplexing](https://developers.google.com/web/fundamentals/performance/http2/images/push01.svg) |
+| :-----: | ---- | 
+[Http2 request and response multiplexing](https://developers.google.com/web/fundamentals/performance/http2#request_and_response_multiplexing) |
 
 </div>
 
@@ -46,8 +46,8 @@ The difficulty is that the SSL handshake between the server and clients happens 
 
 **Server Name Indication (SNI)** is an extension of the TLS protocol which solves this issue by including the domain name in the TLS handshake, so that clients are able to see the correct SSL certificate for the website they want to access.
 
-|                                                        ![Server Name Indication](assets/img/sni.png)                                                         |
-| :-----------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| ![Server Name Indication]({{ "/assets/images/sni.png" | absolute_url }} ) |
+| :----: | -----|
 | _[Server Name Indication](https://aws.amazon.com/blogs/networking-and-content-delivery/unpacking-sni-based-ssl-and-dedicated-ip-ssl-for-amazon-cloudfront/g)_ |
 
 </div>
