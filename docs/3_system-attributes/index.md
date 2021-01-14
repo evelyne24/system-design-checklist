@@ -2,7 +2,7 @@
 layout: default
 title: System attributes
 permalink: /attributes
-nav_order: 2
+nav_order: 3
 ---
 
 {% include toc.md %}

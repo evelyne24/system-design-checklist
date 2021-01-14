@@ -26,4 +26,6 @@ This informs choices for the API design. For example, API protocols, throttling,
 - [ ] The business provides external APIs to third-party developers
 - [ ] The business does not provide external APIs
 
+### Determine if this system has <mark>cost constraints</mark>.
+
 ### Check if there are other <mark>specific requirements</mark> omitted in this list.

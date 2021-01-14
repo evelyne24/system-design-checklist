@@ -33,9 +33,11 @@ The `HTTP/1` specification recommends opening up to two connections from a clien
 
 </div>
 
-- [ ] Use `HTTP/1`
-- [ ] Use `HTTP/2`
-
+- [ ] Request multiplexing needed
+- [ ] Server push for assets needed
+- [ ] Header compression needed
+- [ ] Keep it simple with `HTTP/1`
+ 
 ### Determine whether to serve content from <mark>multiple domains from a dedicated IP address</mark>.
 
 <div class="note" markdown="1">
@@ -139,7 +141,7 @@ CORS can be controlled with the following headers:
    - contains the domain from which the application is started
    - browsers don't allow you to overwrite this value
 
-**Bonus**: Set the `Content-Security-Policy` directives to allow loading javascript libraries only from your domains, to mitigate the risk of malicious third-party scripts.
+**Bonus**: Set the [`Content-Security-Policy` directives](https://content-security-policy.com/) to allow loading javascript libraries only from your domains, to mitigate the risk of malicious third-party scripts.
 
 </div>
 

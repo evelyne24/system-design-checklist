@@ -28,7 +28,7 @@ This clarifies the desired speed of iteration, performance, resilience and maint
 These map to a typical user journey in the application. For example, for an e-commerce website, these are the steps from registration to checkout.
 
 
-### Determine how many <mark>requests per unit of time</mark> the system handles currently.
+### Determine how many <mark>users per unit of time</mark> the system serves currently.
 
 The unit of time can be month, day, second.
 

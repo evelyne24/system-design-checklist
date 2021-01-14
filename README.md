@@ -7,11 +7,15 @@ Read the [The System Design Checklist](https://evelyne24.github.io/system-design
 
 This is a checklist of things to think about when designing or re-designing a software system or parts of it.
 
-For example, the checklist (or a shorter version) can be used to design:
+For example, a specialised checklist can be used to design:
 
-- a new system, e.g. a Minimum Viable Product (MVP)
-- a component e.g. a micro-service in an existing system 
-
+- an Minimum Viable Product (MVP) for a pre-PMF company
+- a microservice for a post-PMF company
+- a migration process from a monolith to a microservice architecture
+- a logging and monitoring system for external auditing
+- a frontend component
+- a new API endpoint
+- etc.
 
 ## ❌ What this checklist is not
 

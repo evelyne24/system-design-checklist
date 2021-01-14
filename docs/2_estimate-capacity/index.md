@@ -1,14 +1,14 @@
 ---
 layout: default
 title: System capacity
-nav_order: 3
+nav_order: 2
 permalink: /capacity
 has_toc: true
 ---
 
 {% include toc.md %}
 
-# Estimate capacity and constraints
+# Estimate the system capacity
 {: .no_toc }
 
 ### Determine if the system is skewed towards <mark>reads or writes</mark>.
@@ -52,10 +52,10 @@ Replication and partitioning have implications on whether the system can offer *
 
 ### Create a <mark>summary table</mark> with these estimates
 
-| Name                                | Value | Notes |
-| :---------------------------------- | :---- | :---- |
-| Number of read requests per seconds |       |       |
-| Number of write requests per second |       |       |
-| Network bandwidth estimates (KB/s)  |       |       |
-| Persistent storage estimates (MB)   |       |       |
-| Memory cache estimates (MB)         |       |       |
+| Name                               | Value | What does this mean? |
+| :--------------------------------- | :---- | :------------------- |
+| Number of read req/s               |       |                      |
+| Number of write req/s              |       |                      |
+| Network bandwidth estimates (KB/s) |       |                      |
+| Persistent storage estimates (MB)  |       |                      |
+| Memory cache estimates (MB)        |       |                      |
