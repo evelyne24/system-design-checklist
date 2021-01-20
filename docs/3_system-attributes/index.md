@@ -20,27 +20,39 @@ Another trade-off is between **maintainability** and **speed of iteration**. Tha
 
 </div>
 
-### **Reliable**
+### **1. Reliability**
 
-The system functions correctly in case of failures and malicious attacks. It is _highly available_, meaning very little downtime, or _fault tolerant_, meaning no downtime.
+The system functions correctly in case of failures and malicious attacks with very little or no downtime. It does so by self-healing in case of network errors, infrastructure problems, malicious attacks and system load.
 
-### **Scalable**
+### **2. Scalability**
 
-The system handles increased load (requests, data) without degraded performance.
+The system handles increased load without degraded performance. It does so by automatically scaling out for peak demands and scaling in when demand decreases, in all necessary components like infrastructure, application services and data stores.
 
-### **Maintainable**
+### **3. Maintainability**
 
-The system is simple to operate and evolve over time without major code refactorings.
+The system is simple to operate and evolve over time without major code refactorings. It does so with a coherent design, reusability of components, simplified monitoring, deployment and administration. 
 
-### **Efficient**
+### **4. Efficiency**
 
-The system makes use of available resources and optimises cost.
+The system makes use of available resources and optimises cost. It does so by handling scaling in and out according to demand, predicting usage patterns and achieving economies of scale with techniques like reserved infrastructure and scale-to-zero.
 
-### **Consistent (UX)**
+### **5. Security**
 
-The system offers a consistent user experience on multiple platforms. When users switch devices, they can continue where they left off.
+The system guarantees confidenciality, integrity and protection against malicious attacks. It does so by being vigilant to quickly detect and remediate vulnerabilities.
 
-### **Transactional**
+### **6. Observability**
+
+The internal state of the system can be inferred from knowledge of its external outputs. It does so by providing metrics, traces, logs and alerts in an aggregated way to ease troubleshooting and allows replication and simulation of real-life failures.
+
+### **7. Consistency (UX)**
+
+The system offers a consistent user experience on multiple platforms. When users switch devices, they can continue where they left off. It does so by maintaining the user state with the appropriate mechanisms like caching and real-time communication with client devices.
+
+### **8. Idempotency**
+
+The system handles repeat requests without unwanted side-effects. For example, if a payment fails, it can be retried without losing money. It does so by using idempotency keys for state-changing requests and using appropriate techniques like exponential backoff and random jitter for handling retries.
+
+### **9. Transactionality**
 
 The system must handle _Online Analytical Processing (OLTP)_.
 
@@ -90,6 +102,3 @@ A distributed system can provide only _two out of three_ guarantees:
 
 </div>
 
-### **Idempotent**
-
-The system handles repeat requests without unwanted side-effects. For example, if a payment fails, it can be retried without losing money.

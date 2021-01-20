@@ -10,7 +10,7 @@ has_toc: true
 # Break down the system layers
 {: .no_toc }
 
-Something to test live reload
+
 
 | ![Simple n-tier system]({{ "/assets/images/system-layers.jpg" | absolute_url }}) |
 | :--------------------------------------: |
