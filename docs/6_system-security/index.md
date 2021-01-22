@@ -4,9 +4,10 @@ title: System security
 permalink: /security
 nav_order: 6
 has_toc: true
+has_children: true
 ---
 
-# Handle system security
+# Ensure system security
 {: .no_toc }
 
 <div class="info" markdown="1">
@@ -14,10 +15,3 @@ has_toc: true
 > _"There is no such thing as perfect security, only varying levels of insecurity."_
 
 </div>
-
-
-## Encryption at rest and in transit
-
-## Authentication and authorisation
-
-## Penetration testing

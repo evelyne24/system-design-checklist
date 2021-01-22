@@ -7,7 +7,7 @@ nav_order: 5
 
 {% include toc.md %}
 
-# Design the APIs
+# Design the internal and external APIs
 {: .no_toc }
 
 <div class="note" markdown="1">

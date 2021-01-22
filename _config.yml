@@ -18,8 +18,8 @@ aux_links:
   "The System Design Checklist on GitHub":
     - "//github.com/evelyne24/system-design-checklist"
 
-# Makes Aux links open in a new tab. Default is false
-aux_links_new_tab: false
+# Makes Aux links open in a new tab. 
+aux_links_new_tab: true
 
 # Footer
 footer_content: "Copyright &copy; 2021 Evelina Vrabie. Distributed by an <a href=\"https://github.com/evelyne24/system-design-checklist/blob/main/LICENCE\">Apache license</a>."

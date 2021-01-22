@@ -154,7 +154,7 @@ A _side cache_ is a generic object store like Elasticache or libraries like Ehca
 
 <div class="note" markdown="1">
 
-pre-populating a small cache can improve performance and and minimise "cold-start".
+Pre-populating a small cache can improve performance and and minimise "cold-start".
 
 </div>
 
