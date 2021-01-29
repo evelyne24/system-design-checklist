@@ -7,6 +7,14 @@
     };
 
     notes.forEach((elem) => {
+      elem.addEventListener(
+        "mousedown",
+        (event) => {
+          event.preventDefault();
+        },
+        false
+      );
+
       elem.addEventListener("click", (event) => collapseExpand(elem));
     });
   });
