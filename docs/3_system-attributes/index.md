@@ -5,8 +5,6 @@ permalink: /attributes
 nav_order: 3
 ---
 
-{% include toc.md %}
-
 # Decide the desirable system attributes
 {: .no_toc }
 

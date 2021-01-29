@@ -27,7 +27,7 @@ code {
     padding-bottom: 0.125rem;
   }
 
-  &>* {
+  & > * {
     display: none;
   }
 
@@ -35,7 +35,7 @@ code {
     &::before {
       content: "- Why do we care about this?";
     }
-    &>* {
+    & > * {
       display: block;
     }
   }
@@ -65,4 +65,14 @@ mark {
 
 .task-list .task-list-item + .task-list-item .task-list-item {
   margin-left: 2rem;
+}
+
+@media print {
+  details,
+  .print-btn,
+  .breadcrumb-nav,
+  .note,
+  .info {
+    display: none !important;
+  }
 }
