@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Logging and monitoring
-permalink: /logging
+title: System observability
+permalink: /observability
 nav_order: 7
 has_toc: true
 ---
 
-# Enable logging and monitoring
+# System observability
 {: .no_toc }
 
 ## Goals and metrics
