@@ -1,0 +1,13 @@
+<script>
+  window.addEventListener("load", function (event) {
+    var notes = Array.from(document.querySelectorAll(".note"));
+
+    var collapseExpand = function (elem) {
+      elem.classList.toggle("expanded");
+    };
+
+    notes.forEach((elem) => {
+      elem.addEventListener("click", (event) => collapseExpand(elem));
+    });
+  });
+</script>

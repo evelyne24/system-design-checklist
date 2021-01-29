@@ -6,23 +6,38 @@ $note-background: #fdfbf5;
 
 code {
   margin: 0em 0.3em;
-  padding: 0.1em 0.2em; 
+  padding: 0.1em 0.2em;
 }
 
 .note {
-  background: $note-background;
+  background-color: $note-background;
   border-left: $border-radius solid $note-border;
   border-radius: $border-radius;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
-  padding: 0.6rem 0.8rem 0.4rem 0.8rem;
+  padding: 0.8rem;
+  margin: 0.8rem 0;
 
   &::before {
     color: $note-border;
-    content: "Why do we care about this?";
+    cursor: pointer;
+    content: "+ Why do we care about this?";
     font-weight: bold;
     text-transform: uppercase;
     font-size: 0.75em;
     padding-bottom: 0.125rem;
+  }
+
+  &>* {
+    display: none;
+  }
+
+  &.expanded {
+    &::before {
+      content: "- Why do we care about this?";
+    }
+    &>* {
+      display: block;
+    }
   }
 }
 
@@ -51,4 +66,3 @@ mark {
 .task-list .task-list-item + .task-list-item .task-list-item {
   margin-left: 2rem;
 }
-
