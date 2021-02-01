@@ -12,21 +12,119 @@ nav_order: 5
 
 <div class="note" markdown="1">
 
-**Opinionated API considerations**
+**API considerations**
 
-- Use an API description language like OpenAPI/Swagger, RAML etc.
-  This serves as a single source of truth for all aspects of API design and development, for example generated documentation and contract-first design.
+1. Use an API description language like OpenAPI/Swagger, RAML etc. This serves as a single source of truth for all aspects of API design and development, for example generated documentation and contract-first design.
+1. Design self-explanatory, intuitive and predictable APIs.
+1. Provide good, human-readable and up-to-date documentation.
+1. Handle unexpected input in a graceful way (forward-compatibility).
+1. Maintain older versions of the API and deprecate them (backward-compatibility).
+1. Ensure the API can only be consumed by authenticated and authorised consumers.
+1. Ensure the API does not leak internal information. For example, an API should not expose numeric order numbers to make it easy for competitors to guess order volumes.
+1. Ensure that the API is reusable across consumers and projects.
+1. Choose between a _stateful_ (maintaining session IDs in between calls) or a _stateless_ pattern (every request provides all the necessary information). Stateless APIs could offer better scalability and availability.
 
-- Design self-explanatory, intuitive and predictable APIs.
-- Provide good, human-readable and up-to-date documentation.
-- Handle unexpected input in a graceful way (forward-compatibility).
-- Maintain older versions of the API and deprecate them (backward-compatibility).
-- Ensure the API can only be consumed by authenticated and authorised consumers.
-- Ensure the API does not leak internal information. For example, an API should not expose numeric order numbers to make it easy for competitors to guess order volumes.
-- Ensure that the API is reusable across consumers and projects.
-- Choose between a _stateful_ (maintaining session IDs in between calls) or a _stateless_ pattern (every request provides all the necessary information).
+  **REST considerations**
 
-  Stateless APIs could offer better scalability and availability.
+1. Use plural nouns for resources `HTTP` verbs to operate on resources
+1. Consider _filtering_ over _nesting_: nesting enforces relationships that could change and changing APIs is hard, e.g.
+  `/payments?subscription=xyz` vs `/subscriptions/xyz/payments`
+1. Consider using _cursors_ over _limit/offsets_:
+  - `before`: the ID of the first object returned (start of page)
+  - `after`: the ID of the last object returned (end of page)
+  - `count`: the maximum number of objects to return
+
+    Benefits:
+
+      - Prevent missing or duplicated records for growing collections
+
+      When where writes happen at a high frequency, the overall position of the cursor in the set might change, 
+  
+      - Prevent large offsets from hitting the database performance
+
+      Using `offset` doesn't work well for large datasets, since the database still needs to read up to `offset` but discard it. With a cursor, the database only fetches the rows after a specific reference point.
+
+      The query could ask for `count + 1`, in order to use the next id as next cursor.
+      ```sql
+      SELECT * from payments
+      WHERE account_id = ? 
+      ORDER BY payment_id DESC
+      LIMIT (count + 1)
+      ```
+
+      ```json
+      {
+        "results": [...],
+        "paging": {
+          "before": "<id>",
+          "after": "<id>",
+          "count": 100
+        }
+      }
+      ``` 
+1. Consider separating _validation errors_ from _integration errors_:
+
+    ```json
+    // integration error
+    {
+      "error": {
+        "id": "ERROR_ID",
+        "type": "access_forbidden",
+        "code": 403,
+        "message": "You don't have the right permissions to access this resource",
+        "documentation_url": "https://api.company.com/docs/errors#access_forbidden",
+        "request_url": "https://api.company.com/requests/REQUEST_ID",
+        "request_id": "REQUEST_ID"
+      }
+    }
+
+    // validation error
+    {
+      "error": {
+        "top errors here": "...",
+        "errors": [{
+          "field": "sort_code",
+          "reason": "missing_field",
+          "message": "Sort code is required"
+        }]
+      }
+    }
+    ```
+
+1. Consider supporting _asynchronous requests_ for long running operations like payment processing and emails, using a query param `async=true`.
+
+    This helps make the error and retry logic a bit easier. The async request returns immediately with a URI which will have the results when they're ready. The API can support a _pull or push approach_.
+
+    For polling, consider replying with different status when the request is new or existing.
+
+    | Request status | Response                                              |
+    | :------------- | :---------------------------------------------------- |
+    | Found          | `HTTP 200 OK` - request has been completed               |
+    | Not found      | `HTTP 202 Accepted`  - request is in progress; send a `location` to check the status and optionally, a `retry-after` for polling interval |
+
+    For push-based, consider passing a `webhook_uri` to receive a notification when the request has completed. For easier versioning, the payload of `results_uri` would return resources IDs rather than serialised objects. This way, resources can be queried using the appropriate API version.
+
+    ```sh
+      curl -H "Authorization: Bearer ${access_token}" \
+      -H "Api-Version: 2021-01-01" \
+      "https://api.example.com/some_data/${data_id}?async=true&webhook_uri=${uri}"
+
+    ```
+
+    ```json
+    {
+      "results_uri": "https://api.example.com/2020-01-01/results/1c367b88-49b1-48b5-a08e-49b6ac2d07b0",
+      "status": "Queued",
+      "task_id": "1c367b88-49b1-48b5-a08e-49b6ac2d07b0"
+    }
+    ```
+
+    | Status    | Description                                          |
+    | :-------- | :--------------------------------------------------- |
+    | Queued    | The request has been acknowledged and waiting to run |
+    | Running   | The request is in progress                           |
+    | Succeeded | The request has successfully terminated              |
+    | Failed    | The request has failed                               |
 
 </div>
 
@@ -49,90 +147,6 @@ Representational State Transfer (REST) is the most common and assumed in the res
 ### Define the <mark>resources and actions</mark> on them.
 
 ### Define the API <mark>endpoints</mark>.
-
-<div class="note" markdown="1">
-
-**Opinionated REST considerations**
-
-- Use plural nouns for resources `HTTP` verbs to operate on resources
-- Consider _filtering_ over _nesting_: nesting enforces relationships that could change and changing APIs is hard, e.g.
-  `/payments?subscription=xyz` vs `/subscriptions/xyz/payments`
-- Consider using _cursors_ over _limit/offsets_:
-
-  - `starting_before`: the ID of the first object returned
-  - `ending_after`: the ID of the first object returned
-  - `limit`: the maximum number of objects to return
-
-  Benefits:
-
-  - prevent missing or duplicated records for growing collections
-  - large offsets could have a hit on the database performance
-
-- Consider separating _validation errors_ from _integration errors_:
-
-```json
-// integration error
-{
-  "error": {
-    "id": "ERROR_ID",
-    "type": "access_forbidden",
-    "code": 403,
-    "message": "You don't have the right permissions to access this resource",
-    "documentation_url": "https://api.company.com/docs/errors#access_forbidden",
-    "request_url": "https://api.company.com/requests/REQUEST_ID",
-    "request_id": "REQUEST_ID"
-  }
-}
-
-// validation error
-{
-  "error": {
-    "top errors here": "...",
-    "errors": [{
-      "field": "sort_code",
-      "reason": "missing_field",
-      "message": "Sort code is required"
-    }]
-  }
-}
-```
-
-- Consider supporting _asynchronous requests_ for long running operations like payment processing and emails, using a query param `async=true`.
-
-  This helps make the error and retry logic a bit easier. The async request returns immediately with a URI which will have the results when they're ready. The API can support a _pull or push approach_.
-
-  For polling, consider replying with different status when the request is new or existing.
-
-  | Request status | Response                                              |
-  | :------------- | :---------------------------------------------------- |
-  | Found          | `HTTP 200 OK` - request has been completed               |
-  | Not found      | `HTTP 202 Accepted`  - request is in progress; send a `location` to check the status and optionally, a `retry-after` for polling interval |
-
-  For push-based, consider passing a `webhook_uri` to receive a notification when the request has completed. For easier versioning, the payload of `results_uri` would return resources IDs rather than serialised objects. This way, resources can be queried using the appropriate API version.
-
-  ```sh
-    curl -H "Authorization: Bearer ${access_token}" \
-    -H "Api-Version: 2021-01-01" \
-    "https://api.example.com/some_data/${data_id}?async=true&webhook_uri=${uri}"
-
-  ```
-
-  ```json
-  {
-    "results_uri": "https://api.example.com/2020-01-01/results/1c367b88-49b1-48b5-a08e-49b6ac2d07b0",
-    "status": "Queued",
-    "task_id": "1c367b88-49b1-48b5-a08e-49b6ac2d07b0"
-  }
-  ```
-
-  | Status    | Description                                          |
-  | :-------- | :--------------------------------------------------- |
-  | Queued    | The request has been acknowledged and waiting to run |
-  | Running   | The request is in progress                           |
-  | Succeeded | The request has successfully terminated              |
-  | Failed    | The request has failed                               |
-
-</div>
 
 - [ ] Create input cleaning and validation rules to prevent common attacks
 - [ ] Define error codes and consistent error message style (i.e. format, encoding)
@@ -212,11 +226,12 @@ The server returns a `HTTP 304 - Not Modified` header with an empty body if the 
 
 For example, throttling and quotas for clients.
 
+<div class="note" markdown="1">
+
 | ![Traffic shaping]({{ "assets/images/api-traffic-shaping.jpg" | absolute_url }}) |
 | :-----------------------------------------------------------: | ---------------- |
 |                     _API Traffic shaping_                     |
 
-<div class="note" markdown="1">
 
 **Traffic shaping** can be used to guarantee a minimum level of performance for all consumers when the load on the API is high. It also helps against Denial of Service (DoS) attacks or clients who bombard the API with requests because of bugs.
 
