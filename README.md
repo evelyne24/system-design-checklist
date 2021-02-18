@@ -22,7 +22,7 @@ This is not a tutorial on software system design. However, as a refresher, I add
 
 ## How I came up with the checklist
 
-The [AWS Solution Architect](https://aws.amazon.com/certification/certified-solutions-architect-associate/) exam asks 60+ scenario-based questions in 120 minutes. While I was learning, I came up with a mental checklist to:
+The [AWS Solution Architect](https://aws.amazon.com/certification/certified-solutions-architect-associate/) exam (_Why, you ask? Because I felt I needed to contribute to AWS's bottom line, you know...pull them out of the red_) asks 60+ scenario-based questions in 120 minutes. While I was learning, I came up with a mental checklist to:
 
 - extract the system requirements from the question
 - determine the desired system properties
