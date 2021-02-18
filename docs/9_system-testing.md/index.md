@@ -10,3 +10,7 @@ has_toc: true
 
 # System testing
 {: .no_toc }
+
+_WIP_
+
+Other types of testing: unit, integration, functional, UX...

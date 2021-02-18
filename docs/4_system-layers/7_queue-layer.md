@@ -11,6 +11,8 @@ nav_order: 7
 ## Message queues
 {: .no_toc }
 
+_WIP_
+
 ### Determine if and why the system needs <mark>asynchronous communication</mark>.
 
 <div class="note" markdown="1">
@@ -82,4 +84,4 @@ TODO
 
 For example, between a message queue and a database.
 
-TODO
+
