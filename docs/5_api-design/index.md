@@ -24,107 +24,11 @@ nav_order: 5
 1. Ensure that the API is reusable across consumers and projects.
 1. Choose between a _stateful_ (maintaining session IDs in between calls) or a _stateless_ pattern (every request provides all the necessary information). Stateless APIs could offer better scalability and availability.
 
-  **REST considerations**
+**REST considerations**
 
 1. Use plural nouns for resources `HTTP` verbs to operate on resources
 1. Consider _filtering_ over _nesting_: nesting enforces relationships that could change and changing APIs is hard, e.g.
-  `/payments?subscription=xyz` vs `/subscriptions/xyz/payments`
-1. Consider using _cursors_ over _limit/offsets_:
-  - `before`: the ID of the first object returned (start of page)
-  - `after`: the ID of the last object returned (end of page)
-  - `count`: the maximum number of objects to return
-
-    Benefits:
-
-      - Prevent missing or duplicated records for growing collections
-
-      When where writes happen at a high frequency, the overall position of the cursor in the set might change, 
-  
-      - Prevent large offsets from hitting the database performance
-
-      Using `offset` doesn't work well for large datasets, since the database still needs to read up to `offset` but discard it. With a cursor, the database only fetches the rows after a specific reference point.
-
-      The query could ask for `count + 1`, in order to use the next id as next cursor.
-      ```sql
-      SELECT * from payments
-      WHERE account_id = ? 
-      ORDER BY payment_id DESC
-      LIMIT (count + 1)
-      ```
-
-      ```json
-      {
-        "results": [...],
-        "paging": {
-          "before": "<id>",
-          "after": "<id>",
-          "count": 100
-        }
-      }
-      ``` 
-1. Consider separating _validation errors_ from _integration errors_:
-
-    ```json
-    // integration error
-    {
-      "error": {
-        "id": "ERROR_ID",
-        "type": "access_forbidden",
-        "code": 403,
-        "message": "You don't have the right permissions to access this resource",
-        "documentation_url": "https://api.company.com/docs/errors#access_forbidden",
-        "request_url": "https://api.company.com/requests/REQUEST_ID",
-        "request_id": "REQUEST_ID"
-      }
-    }
-
-    // validation error
-    {
-      "error": {
-        "top errors here": "...",
-        "errors": [{
-          "field": "sort_code",
-          "reason": "missing_field",
-          "message": "Sort code is required"
-        }]
-      }
-    }
-    ```
-
-1. Consider supporting _asynchronous requests_ for long running operations like payment processing and emails, using a query param `async=true`.
-
-    This helps make the error and retry logic a bit easier. The async request returns immediately with a URI which will have the results when they're ready. The API can support a _pull or push approach_.
-
-    For polling, consider replying with different status when the request is new or existing.
-
-    | Request status | Response                                              |
-    | :------------- | :---------------------------------------------------- |
-    | Found          | `HTTP 200 OK` - request has been completed               |
-    | Not found      | `HTTP 202 Accepted`  - request is in progress; send a `location` to check the status and optionally, a `retry-after` for polling interval |
-
-    For push-based, consider passing a `webhook_uri` to receive a notification when the request has completed. For easier versioning, the payload of `results_uri` would return resources IDs rather than serialised objects. This way, resources can be queried using the appropriate API version.
-
-    ```sh
-      curl -H "Authorization: Bearer ${access_token}" \
-      -H "Api-Version: 2021-01-01" \
-      "https://api.example.com/some_data/${data_id}?async=true&webhook_uri=${uri}"
-
-    ```
-
-    ```json
-    {
-      "results_uri": "https://api.example.com/2020-01-01/results/1c367b88-49b1-48b5-a08e-49b6ac2d07b0",
-      "status": "Queued",
-      "task_id": "1c367b88-49b1-48b5-a08e-49b6ac2d07b0"
-    }
-    ```
-
-    | Status    | Description                                          |
-    | :-------- | :--------------------------------------------------- |
-    | Queued    | The request has been acknowledged and waiting to run |
-    | Running   | The request is in progress                           |
-    | Succeeded | The request has successfully terminated              |
-    | Failed    | The request has failed                               |
+  `/payments?subscription=xyz` vs `/subscriptions/xyz/payments`                            
 
 </div>
 
@@ -148,10 +52,127 @@ Representational State Transfer (REST) is the most common and assumed in the res
 
 ### Define the API <mark>endpoints</mark>.
 
+### Consider <mark>input validation and error handling</mark>.
+
+<div class="note" markdown="1">
+
+Consider separating _validation errors_ from _integration errors_:
+
+**Integration error**:
+```json
+{
+  "error": {
+    "id": "ERROR_ID",
+    "type": "access_forbidden",
+    "code": 403,
+    "message": "You don't have the right permissions to access this resource",
+    "documentation_url": "https://api.company.com/docs/errors#access_forbidden",
+    "request_url": "https://api.company.com/requests/REQUEST_ID",
+    "request_id": "REQUEST_ID"
+  }
+}
+```
+
+**Validation error**:
+```json
+{
+  "error": {
+    "top errors here": "...",
+    "errors": [{
+      "field": "sort_code",
+      "reason": "missing_field",
+      "message": "Sort code is required"
+    }]
+  }
+}
+```
+
+</div>
+
 - [ ] Create input cleaning and validation rules to prevent common attacks
 - [ ] Define error codes and consistent error message style (i.e. format, encoding)
+
+
+### Consider <mark>endpoint performance</mark>. 
+
+<div class="note" markdown="1">
+
+Consider using _cursors_ over _limit/offsets_:
+
+ - `before`: the ID of the first object returned (start of page)
+ - `after`: the ID of the last object returned (end of page)
+ - `count`: the maximum number of objects to return
+
+  Benefits:
+
+  - Prevents missing or duplicated records for growing collections.
+  
+  When where writes happen at a high frequency, the overall position of the cursor in the set might change. 
+
+  - Prevents large offsets from hitting the database performance.
+  
+  Using `offset` doesn't work well for large datasets, since the database still needs to read up to `offset` but discard it. With a cursor, the database only fetches the rows after a specific reference point.
+
+  The query could ask for `count + 1`, in order to use the next id as next cursor.
+  
+  ```sql
+  SELECT * from payments
+  WHERE account_id = ? 
+  ORDER BY payment_id DESC
+  LIMIT (count + 1)
+  ```
+
+  ```json
+  {
+    "results": [...],
+    "paging": {
+      "before": "<id>",
+      "after": "<id>",
+      "count": 100
+    }
+  }
+  ``` 
+
+  Consider supporting _asynchronous requests_ for long running operations like payment processing and emails, using a query param `async=true`.
+
+  This helps make the error and retry logic a bit easier. The async request returns immediately with a URI which will have the results when they're ready. The API can support a _pull or push approach_.
+
+  For polling, consider replying with different status when the request is new or existing.
+
+  | Request status | Response                                                                                                                                  |
+  | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+  | Found          | `HTTP 200 OK` - request has been completed                                                                                                |
+  | Not found      | `HTTP 202 Accepted`  - request is in progress; send a `location` to check the status and optionally, a `retry-after` for polling interval |
+
+  For push-based, consider passing a `webhook_uri` to receive a notification when the request has completed. For easier versioning, the payload of `results_uri` would return resources IDs rather than serialised objects. This way, resources can be queried using the appropriate API version.
+
+  ```sh
+    curl -H "Authorization: Bearer ${access_token}" \
+    -H "Api-Version: 2021-01-01" \
+    "https://api.example.com/some_data/${data_id}?async=true&webhook_uri=${uri}"
+
+  ```
+
+  ```json
+  {
+    "results_uri": "https://api.example.com/2020-01-01/results/1c367b88-49b1-48b5-a08e-49b6ac2d07b0",
+    "status": "Queued",
+    "task_id": "1c367b88-49b1-48b5-a08e-49b6ac2d07b0"
+  }
+  ```
+
+  | Status    | Description                                          |
+  | :-------- | :--------------------------------------------------- |
+  | Queued    | The request has been acknowledged and waiting to run |
+  | Running   | The request is in progress                           |
+  | Succeeded | The request has successfully terminated              |
+  | Failed    | The request has failed                               |
+
+</div>
+
 - [ ] Define pagination style to improve performance
 - [ ] Enable content compression to reduce latency and bandwidth
+- [ ] Support for asynchronous requests
 
 ### Enable API <mark>caching</mark>.
 
@@ -224,13 +245,12 @@ The server returns a `HTTP 304 - Not Modified` header with an empty body if the 
 
 ### Determine how to handle <mark>traffic shaping</mark>
 
-For example, throttling and quotas for clients.
-
 <div class="note" markdown="1">
 
 | ![Traffic shaping]({{ "assets/images/api-traffic-shaping.jpg" | absolute_url }}) |
 | :-----------------------------------------------------------: | ---------------- |
 |                     _API Traffic shaping_                     |
+
 
 
 **Traffic shaping** can be used to guarantee a minimum level of performance for all consumers when the load on the API is high. It also helps against Denial of Service (DoS) attacks or clients who bombard the API with requests because of bugs.
@@ -247,7 +267,14 @@ b) _delayed_, e.g. put in a queue with a fixed length.
 
 Note: Even if you use API Keys and Usage Plans you still require authentication and authorisation for your API clients. Otherwise, a client with a valid API Key can access all your APIs in that usage plan. For authentication and authorisation on AWS you can use [IAM](https://docs.aws.amazon.com/apigateway/latest/developerguide/security-iam.html), a [Lambda authoriser](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html) or Cognito user pool.
 
+**Throttling vs quotas**
+Throttling refers to limiting the amount of requests per second, while quotas allow a certain amount of API calls over a longer period, e.g. montly. Quotas might need to be automatically or manually reset. 
+
 </div>
+
+- [ ] Use API throttling
+- [ ] Use client quotas 
+
 
 ### Decide how to manage API <mark>evolution and versioning</mark>.
 

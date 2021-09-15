@@ -11,6 +11,28 @@ nav_order: 4
 ## Application services
 {: .no_toc }
 
+### Define the <mark>type of client-server communication</mark>.
+
+<div class="note" markdown="1">
+
+**AJAX Polling, HTTP Long-Polling, Server-Sent Events, WebSockets**
+
+  The first gen **AJAX apps** worked on the basic idea that the client repeatedly asks (or _polls_) the server for data. Then the client would wait until a response is returned. The problems are HTTP overhead for empty responses and finding the right interval for polling is also challenging.
+
+  The next improvement is **HTTP Long-Polling**, where the client requests data just like above and the server keeps the connection 'hanging' until data becomes available. The problem is that the connection gets closed because of timeout, so the client must reconnect.
+
+  **Server-side events** are a persistent **uni-directional connection** between a server and a client.
+
+  **WebSockets** are a persistent **bi-directional, full-duplex TCP connection** between a client and a server. It removes the HTTP overhead (SSL handshake, content negotiation, lots of headers) for every message.
+
+  Read more [here](https://www.html5rocks.com/en/tutorials/eventsource/basics/).
+                        
+</div>
+
+- [ ] Polling
+- [ ] Server-Sent Events (SSEs)
+- [ ] WebSockets
+
 
 ### Decide between a <mark>monolith or a microservice architecture</mark>.
 

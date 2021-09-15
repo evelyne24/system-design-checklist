@@ -77,52 +77,14 @@ Consider the expiration period carefully. If it's too short, the cached objects 
 - [ ] LRU (Least Recently Used)
 - [ ] LFU (Least Frequently Updated)
 
-### Determine the level of accepted <mark>data consistency</mark>.
-
-<div class="warn" markdown="1">
-
-A company had an incident once. An out-of-date database follower was promoted as a leader. The leader lagged behind the old leader's auto-increment primary keys, meaning that some keys were re-assigned. These primary keys were also used in cache. The result: private data disclosed to the wrong users.
-
-</div>
+### Consider <mark>data consistency</mark> between the cache and the database.
 
 <div class="note" markdown="1">
 
-**Optimistic vs pessimistic concurrency**
-
-- _Optimistic_: before updating the data, the application checks if the cached data has changed since last retrieved. If it's the same, the data is updated. If it's not, the application needs to decide if/how to update it, either via automatic conflict resolution or asking the user to solve the conflict.
-- _Pessimistic_: upon data retrieval, the application locks the cache to prevent other instances from changing the same data.
-
-**Trade-offs**
-
-- Optimistic concurrency is suitable for less frequent updates or ones with less likelihood of collisions.
-- Pessimistic concurrency is suitable for transactionality, e.g. if multiple items need to be updated at the same time in a consistent manner. However, locking impacts latency.
-
-**Conflict resolution**
-
-Conflict resolution is extremely tricky. Even companies like Amazon get it wrong, like in the case of a famous bug they had where users sometimes saw deleted items being added back to the shopping cart. Read more in [this AWS whitepaper](https://abl.gtu.edu.tr/hebe/AblDrive/69276048/w/Storage/104_2011_1_601_69276048/Downloads/m10.pdf).
-
-Examples where conflicts can happen:
-
-- apps with locally cached data on multiple user devices syncing state, e.g. calendars, reminders, notes etc.
-- collaborative software with several users concurrently modifying the same data, e.g. Google Docs, Notion, Miro etc.
-- distributed databases and caches with multiple replicas
-
-**When and how conflict strategies are applied:**
-
-1. _On write_: a background process that detects conflicts in replicated databases and allows the application to execute a bit of code.
-2. _On read_: every time a conflict is detected, the data is stored as another version. When the data is read, all the versions are returned and the application (potentially through UX) is asked to solve them.
-
-**Automatic conflict resolution strategies:**
-
-1. Conflict-free replicated datatypes ([CRDTs](https://crdt.tech/)) for sets, maps, lists, counters etc.
-2. [Mergeable persistent data structures](https://www.researchgate.net/profile/Tom_Mens/publication/3188238_A_State-of-the-Art_Survey_on_Software_Merging/links/5724e1b608ae586b21dbc5d4/A-State-of-the-Art-Survey-on-Software-Merging.pdf) similar to Git version control with a three-way merge function
-3. [Operational transformation algorithm](https://en.wikipedia.org/wiki/Operational_transformation) used by Google Docs for concurrent editing an ordered list of items like a text document.
+A company had an incident once. An out-of-date database follower was promoted as a leader. The leader lagged behind the old leader's auto-increment primary keys, meaning that some keys were re-assigned. **These primary keys were also used in cache.** The result: private data disclosed to the wrong users.
 
 </div>
 
-- [ ] Ensure _read-after-write_ consistency, e.g. if the user reloads the page they will see any updates they've submitted themselves
-- [ ] Ensure _monotonic reads_, e.g. if the user requests the same data multiple times in a row, they won't see the data moving back in time because of stale updates
-- [ ] Consider _optimistic_ (conflict resolution) vs _pessimistic concurrency_ (locking), i.e. ensuring that updates made by one instance of your services don't overwrite changes made by another
 
 ### Ensure the cache has <mark>redundancy</mark> and is not a SPOF itself.
 
@@ -131,8 +93,8 @@ Examples where conflicts can happen:
 **Inline vs side cache**
 
 | ![Inline vs side-cache]({{ "assets/images/inline-vs-side-cache.jpg" | absolute_url }}) |
-| :-----------------------------------------------------------: |
-|                    _Inline vs side-cache_                     |
+| :-----------------------------------------------------------------: |
+|                       _Inline vs side-cache_                        |
 
 An _inline cache_ (read-through or write-through) embeds cache management into the main data access API, making cache management an implementation detail of that API, e.g. DynamoDB Accelerator (DAX), HTTP caching local or with an external service like Varnish or a CDN.
 

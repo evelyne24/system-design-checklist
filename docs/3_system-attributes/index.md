@@ -52,7 +52,7 @@ The system handles repeat requests without unwanted side-effects. For example, i
 
 ### **9. Transactionality**
 
-The system must handle _Online Analytical Processing (OLTP)_.
+The system must handle _Online Transaction Processing (OLTP)_.
 
 <div class="note" markdown="1">
 
