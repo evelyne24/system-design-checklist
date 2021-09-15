@@ -12,13 +12,3 @@ has_toc: true
 
 _WIP_
 
-### Performance testing
-
-- [ ] Identify performance metrics
-- [ ] Create test plan and scenarios
-- [ ] Benchmarking
-- [ ] Load testing
-    - [ ] Capacity testing
-    - [ ] Stress testing
-    - [ ] Soak testing
-    - [ ] Spike testing

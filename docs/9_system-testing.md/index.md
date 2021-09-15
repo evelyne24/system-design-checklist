@@ -12,7 +12,6 @@ has_toc: true
 
 {: .no_toc }
 
-_WIP_
 
 <div class="note" markdown="1">
 
@@ -81,6 +80,12 @@ There are several strategies that can be used to deploy new applications (or ver
 
 </div>
 
+### Ensure the system is <mark>periodically tested for performance and resilience</mark>.
+
+- [ ] Identify performance metrics
+- [ ] Create test plan and scenarios
+- [ ] Create benchmarking plan
+
 ### Ensure the system employs appropriate testing strategies in the <mark>pre-release phase</mark>.
 
 - [ ] Linting
@@ -100,6 +105,7 @@ There are several strategies that can be used to deploy new applications (or ver
 - [ ] Integration tests
 - [ ] Load tests
 - [ ] Soak tests
+- [ ] Spike testing
 - [ ] Config tests
 - [ ] Shadowing
 
@@ -115,7 +121,13 @@ There are several strategies that can be used to deploy new applications (or ver
 - [ ] Tracing
 - [ ] Profiling
 - [ ] Logging and monitoring
+- [ ] Load testing
+- [ ] Capacity testing
+- [ ] Stress testing
 - [ ] Chaos testing
 - [ ] Auditing
 - [ ] Pen-testing
 - [ ] Dynamic exploration and troubleshooting
+
+
+
