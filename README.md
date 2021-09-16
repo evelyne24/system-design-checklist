@@ -7,7 +7,7 @@
 
 This is a checklist of things to think about when designing or re-designing a software system or parts of it.
 
-For example, a specialised checklist can be used to design:
+For example, a specialised, shorter version of this checklist can be used to design:
 
 - an Minimum Viable Product (MVP) for a pre-PMF company
 - a microservice for a post-PMF company
@@ -22,30 +22,30 @@ This is not a tutorial on software system design. However, as a refresher, I add
 
 ## How I came up with the checklist
 
-The [AWS Solution Architect](https://aws.amazon.com/certification/certified-solutions-architect-associate/) exam (_Why, you ask? Because I felt I needed to contribute to AWS's bottom line, you know...pull them out of the red_) asks 60+ scenario-based questions in 120 minutes. While I was learning, I came up with a mental checklist to:
+ I've successfully used checklists my entire life, as a software engineer, during my time as a CTO of an early-stage fintech app, where I designed software for high-street banks and when I prepared for the [AWS Solution Architect](https://aws.amazon.com/certification/certified-solutions-architect-associate/) exam. I created a mental checklist to:
 
 - extract the system requirements from the question
 - determine the desired system properties
 - break down the system layers
 - consider trade-offs at each layer
 
-My mental checklist was useful and I passed the exam 🙌.
-
-This checklist has the same structure. I beefed it up with a lot more questions I thought about, during my time as a CTO of an early-stage fintech app, where I designed software for high-street banks.
+This is how I was able answer 60+ scenario-based questions in 120 minutes and pass the exam 🙌.
 
 ## Why I made the checklist public
 
-There are many books and articles on software system design with amazing knowledge. However, I found **they lack a practical format**, to help apply that knowledge immediately. 
+We are bombarded by new information every day. There are many books and articles on software system design. Technologies, frameworks, languages, practices change at huge speed.
 
-<mark>I noticed a clear move towards checklists and flowcharts in the developer community. I believe that is because we are bombarded by new information every day. Technologies, frameworks, languages, practices change at huge speed. Our brains cannot cope with too many long-form texts, day-to-day.</mark>
+<mark>However, most of them lack a practical format, to apply the knowledge **immediately**. Also, Our brains can't cope well with so many long-form texts, day-to-day. </mark>
 
-Hence, this repository is the first step towards a more practical tool. I want to help not only first-time, early-stage CTOs, but any software team who finds a use for this checklist before a routine design task.
+I noticed a move towards checklists and flowcharts in the developer community. Therefore, this repository is the first step towards a practical tool. I want to help not only first-time CTOs, but any software team before a routine design task.
 
 I hope the checklist accomplishes three goals:
 
 1. Helps them **discover unknown unknowns** by sparking curiosity and reflection ahead of the design task.
 2. Inspires them to **use it in Pre-Mortems**, to better assess high-impact, high-risk systems, and **in Post-Mortems**, to update it with learnings discovered the hard way.
 3. Used and refined frequently, it **builds good habits** leading to high quality work.
+
+“Checklists […] remind us of the minimum necessary steps and make them explicit. They not only offer the possibility of verification but also instill a kind of discipline of higher performance.” — Atul Gawande, The Checklist Manifesto
 
 
 ## How to contribute to the checklist
@@ -56,7 +56,7 @@ If you like the checklist, let's make it more useful together! 💪
 
 You're very welcome to contribute to fix mistakes, and refine the list of questions and options by submitting a Pull Request.
 
-I'm running some A/B tests with real teams from a few companies to benchmark if the usage of a checklist results in:
+I'm running some tests with real teams from a few companies to benchmark if the usage of a checklist results in:
 
 > - shorter `commit → review → deploy` cycles
 > - improved code quality
