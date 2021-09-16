@@ -35,7 +35,7 @@ This is how I was able answer 60+ scenario-based questions in 120 minutes and pa
 
 We are bombarded by new information every day. There are many books and articles on software system design. Technologies, frameworks, languages, practices change at huge speed.
 
-<mark>However, most of them lack a practical format, to apply the knowledge **immediately**. Also, Our brains can't cope well with so many long-form texts, day-to-day. </mark>
+<mark>However, most of them lack a practical format, to apply the knowledge immediately. Also, our brains can't cope well with so many long-form texts on a daily basis.</mark>
 
 I noticed a move towards checklists and flowcharts in the developer community. Therefore, this repository is the first step towards a practical tool. I want to help not only first-time CTOs, but any software team before a routine design task.
 
