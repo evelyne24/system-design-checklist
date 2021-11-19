@@ -156,7 +156,7 @@ This makes website rendering faster, because files are downloaded faster. The am
 
 Clients must use `Accept-Encoding` to indicate support for compressed files `gzip` or `br` and the server must respond with `Content-Length` to determine the size of the file.
 
-[Comparing Broli with Gzip](https://expeditedsecurity.com/blog/nginx-brotli/), it has support across major browsers, it's faster and produces smaller files:
+[Comparing Brotli with Gzip](https://expeditedsecurity.com/blog/nginx-brotli/), it has support across major browsers, it's faster and produces smaller files:
 
 - HTML files are 21% smaller
 - CSS files are 17% smaller
@@ -165,7 +165,7 @@ Clients must use `Accept-Encoding` to indicate support for compressed files `gzi
 </div>
 
 - [ ] `Gzip` compression is enabled
-- [ ] `Broli` compression is enabled
+- [ ] `Brotli` compression is enabled
 
 ### Check if a <mark>web firewall</mark> is enabled to prevent common attacks.
 
