@@ -107,7 +107,7 @@ Consider using _cursors_ over _limit/offsets_:
 
   - Prevents missing or duplicated records for growing collections.
   
-  When where writes happen at a high frequency, the overall position of the cursor in the set might change. 
+  When writes happen at a high frequency, the overall position of the cursor in the set might change. 
 
   - Prevents large offsets from hitting the database performance.
   
