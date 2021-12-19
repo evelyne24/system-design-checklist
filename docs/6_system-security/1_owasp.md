@@ -102,7 +102,7 @@ The best practices are listed in the [XSS Prevention Cheat Sheet](https://cheats
 
 3. **DOM-based XSS attacks**
 
-The vulnerability lies in the browser-side script code and can take many forms, like replacing a DOM element with malicious login panel, stealing key srokes, download software etc.
+The vulnerability lies in the browser-side script code and can take many forms, like replacing a DOM element with malicious login panel, stealing key strokes, download software etc.
 
 The [DOM-based XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html) has the best practices.
 
