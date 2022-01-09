@@ -10,7 +10,6 @@ has_toc: true
 ## Organisational performance
 {: .no_toc }
 
-_WIP_
 
 ### Product and process
 
@@ -18,7 +17,7 @@ _WIP_
 - [ ] Make the flow of work visible through the value stream
     - [ ] Ensure teams have a good understanding and visibility into the flow of work, including the status of products and features in other teams
 - [ ] Work in small batches
-    - [ ] Ensure teams slice work into small pieces completeable in a week or less
+    - [ ] Ensure teams slice work into small pieces completable in a week or less
     - [ ] Decompose feature to allow rapid development (short lead times and fast feedback loops)
     - [ ] _Implement this practice at both the product and software level_
 - [ ] Foster and enable team experimentation
@@ -47,12 +46,12 @@ _WIP_
 ### Cultural capabilities
 
 - [ ] Support a generative culture 
-    - [ ] Ensure pshychological safety at work
+    - [ ] Ensure psychological safety at work
     - [ ] Promote high cooperation and trust
     - [ ] Encourage conscious inquiry
     - [ ] Decrease burnout
 - [ ] Encourage and support learning
-    - [ ] Promote learning as essential for continous progress
+    - [ ] Promote learning as essential for continuos progress
     - [ ] Ensure everyone understands that learning is not cost, but investment
     - [ ] Make learning a measure of organisational culture
 - [ ] Support and facilitate collaboration among teams
